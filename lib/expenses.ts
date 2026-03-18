@@ -6,6 +6,10 @@ export type ExpenseCategory =
   | 'ショッピング'
   | 'その他'
 
+export const CATEGORIES: ExpenseCategory[] = [
+  '交通費', '宿泊費', '食費', '観光', 'ショッピング', 'その他',
+]
+
 export type Expense = {
   id: string
   date: string
@@ -59,17 +63,17 @@ export const expenses: Expense[] = [
   { id: '40', date: '2026-03-08', category: 'その他',    amount: 6500,   memo: 'ビザ申請費用' },
 ]
 
-export function getTotalSpent(): number {
-  return expenses.reduce((sum, e) => sum + e.amount, 0)
+export function getTotalSpent(arr: Expense[]): number {
+  return arr.reduce((sum, e) => sum + e.amount, 0)
 }
 
-export function getBudgetRemaining(): number {
-  return BUDGET - getTotalSpent()
+export function getBudgetRemaining(arr: Expense[]): number {
+  return BUDGET - getTotalSpent(arr)
 }
 
-export function getByCategory(): { category: ExpenseCategory; total: number }[] {
+export function getByCategory(arr: Expense[]): { category: ExpenseCategory; total: number }[] {
   const map = new Map<ExpenseCategory, number>()
-  for (const e of expenses) {
+  for (const e of arr) {
     map.set(e.category, (map.get(e.category) ?? 0) + e.amount)
   }
   return Array.from(map.entries())
@@ -77,9 +81,9 @@ export function getByCategory(): { category: ExpenseCategory; total: number }[] 
     .sort((a, b) => b.total - a.total)
 }
 
-export function getByDate(): { date: string; amount: number }[] {
+export function getByDate(arr: Expense[]): { date: string; amount: number }[] {
   const map = new Map<string, number>()
-  for (const e of expenses) {
+  for (const e of arr) {
     map.set(e.date, (map.get(e.date) ?? 0) + e.amount)
   }
   return Array.from(map.entries())
