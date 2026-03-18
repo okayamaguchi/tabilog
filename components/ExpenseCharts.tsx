@@ -70,6 +70,8 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             </Pie>
             <Tooltip
               formatter={(value) => [`¥${Number(value).toLocaleString()}`, '金額']}
+              position={{ x: 4, y: 4 }}
+              wrapperStyle={{ maxWidth: '155px' }}
             />
           </PieChart>
         </ResponsiveContainer>
