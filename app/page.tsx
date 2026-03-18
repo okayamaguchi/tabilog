@@ -1,5 +1,6 @@
 import { BUDGET, getTotalSpent, getBudgetRemaining, getByCategory, getByDate } from '../lib/expenses'
 import ExpenseCharts from '../components/ExpenseCharts'
+import VisitMap from '../components/VisitMapWrapper'
 
 export default function Home() {
   const totalSpent = getTotalSpent()
@@ -60,6 +61,16 @@ export default function Home() {
       </div>
 
       <ExpenseCharts byCategory={byCategory} byDate={byDate} />
+
+      {/* Visit map */}
+      <section className="mt-10">
+        <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
+          訪問した場所
+        </h2>
+        <div className="rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+          <VisitMap />
+        </div>
+      </section>
     </main>
   )
 }
