@@ -18,6 +18,15 @@ const CATEGORY_COLORS: Record<string, string> = {
   'その他':      '#d4ece0',
 }
 
+const CATEGORY_EMOJI: Record<string, string> = {
+  '交通費':      '🚆',
+  '宿泊費':      '🏨',
+  '食費':        '🍔',
+  '観光':        '🎭',
+  'ショッピング': '🛍️',
+  'その他':      '📦',
+}
+
 export default function ExpensesPageContent() {
   const [allExpenses, setAllExpenses] = useState<Expense[]>(mockExpenses)
 
@@ -36,12 +45,12 @@ export default function ExpensesPageContent() {
   return (
     <>
       {/* 棒グラフのみ（byCategory は渡さない） */}
-      <div className="rounded-3xl bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)] mb-6">
+      <div className="rounded-[32px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)] mb-6">
         <ExpenseCharts byDate={byDate} />
       </div>
 
       {/* 費用一覧 */}
-      <div className="rounded-3xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)] overflow-hidden">
+      <div className="rounded-[32px] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)] overflow-hidden">
         <div className="grid grid-cols-[80px_90px_1fr_90px] gap-2 px-5 py-3 border-b border-gray-100">
           <span className="text-xs text-gray-400 font-semibold uppercase">日付</span>
           <span className="text-xs text-gray-400 font-semibold uppercase">カテゴリ</span>
@@ -64,7 +73,7 @@ export default function ExpensesPageContent() {
                     : 'white',
                 }}
               >
-                {e.category}
+                {CATEGORY_EMOJI[e.category] ?? ''} {e.category}
               </span>
             </span>
             <span className="text-sm text-gray-700 truncate">{e.memo}</span>

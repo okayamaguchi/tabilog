@@ -45,13 +45,13 @@ export default function ExpenseDashboard() {
             ;(e.currentTarget as HTMLElement).style.color = 'white'
           }}
         >
-          費用を入力
+          ✏️ 費用を入力
         </Link>
       </div>
 
       {/* サマリーカード */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="rounded-3xl bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
           <p className="text-xs text-gray-400 mb-1">総支出</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
             ¥{totalSpent.toLocaleString()}
@@ -59,7 +59,7 @@ export default function ExpenseDashboard() {
           <p className="text-xs text-gray-400 mt-1">予算 ¥{BUDGET.toLocaleString()}</p>
         </div>
         <div
-          className="rounded-3xl p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
+          className="rounded-[32px] p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
           style={{
             background: remaining >= 0
               ? 'linear-gradient(135deg, #f0f7f3, #E3F2FD)'
@@ -77,7 +77,7 @@ export default function ExpenseDashboard() {
           <p className="text-xs text-gray-400 mt-1">使用率 {usedPercent.toFixed(1)}%</p>
         </div>
         {/* 3列目: PC のみ表示 */}
-        <div className="hidden md:block rounded-3xl bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+        <div className="hidden md:block rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
           <p className="text-xs text-gray-400 mb-1">カテゴリ内訳</p>
           <div className="flex items-end gap-1 h-9 mt-2">
             {byCategory.slice(0, 5).map((d, i) => {
@@ -101,7 +101,7 @@ export default function ExpenseDashboard() {
       </div>
 
       {/* プログレスバー */}
-      <div className="mt-4 rounded-3xl bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+      <div className="mt-4 rounded-[32px] bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
         <div className="flex justify-between text-xs text-gray-400 mb-2">
           <span>支出進捗</span>
           <span className="font-semibold font-poppins" style={{ color: '#4a7c59' }}>

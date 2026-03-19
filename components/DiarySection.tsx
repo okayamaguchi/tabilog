@@ -10,12 +10,12 @@ export default function DiarySection() {
   return (
     <section className="mt-10">
       <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-        旅の日記
+        ✈️ 旅の日記
       </h2>
 
       {/* Featured */}
       <Link href={`/posts/${featured.id}`} className="block group mb-3">
-        <div className="relative rounded-3xl overflow-hidden h-[200px] md:h-[280px]">
+        <div className="relative rounded-[32px] overflow-hidden h-[200px] md:h-[280px]">
           <Image
             src={featured.thumbnail}
             alt={featured.title}
@@ -25,8 +25,16 @@ export default function DiarySection() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-4 md:p-6">
-            <span className="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-0.5 rounded-full mb-2">
-              最新の旅
+            <span
+              className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 -rotate-2"
+              style={{
+                background: 'white',
+                color: '#4a7c59',
+                border: '3px solid #4a7c59',
+                boxShadow: '2px 2px 6px rgba(0,0,0,0.18)',
+              }}
+            >
+              ✈️ 最新の旅
             </span>
             <p className="text-white font-bold text-base md:text-xl leading-snug">
               {featured.title}
@@ -42,7 +50,7 @@ export default function DiarySection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {rest.map((post) => (
           <Link key={post.id} href={`/posts/${post.id}`} className="block group">
-            <div className="relative rounded-2xl overflow-hidden h-[140px]">
+            <div className="relative rounded-[28px] overflow-hidden h-[140px]">
               <Image
                 src={post.thumbnail}
                 alt={post.title}

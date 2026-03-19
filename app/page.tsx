@@ -21,9 +21,9 @@ export default function Home() {
       {/* 訪問した場所 */}
       <section className="mt-10">
         <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-          訪問した場所
+          📍 訪問した場所
         </h2>
-        <div className="rounded-3xl overflow-hidden shadow-sm">
+        <div className="rounded-[32px] overflow-hidden shadow-sm">
           <VisitMapWrapper />
         </div>
       </section>
