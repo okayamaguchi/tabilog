@@ -79,20 +79,17 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             </PieChart>
           </ResponsiveContainer>
           {/* Legend */}
-          <ul className="mt-3 space-y-1">
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
             {byCategory.map((d, i) => (
-              <li key={d.category} className="flex items-center justify-between text-xs text-gray-600">
-                <span className="flex items-center gap-1.5">
-                  <span
-                    className="inline-block w-2.5 h-2.5 rounded-sm"
-                    style={{ background: COLORS[i % COLORS.length] }}
-                  />
-                  {d.category}
-                </span>
-                <span className="font-medium text-gray-800">¥{d.total.toLocaleString()}</span>
-              </li>
+              <span key={d.category} className="flex items-center gap-1 text-xs text-gray-600 whitespace-nowrap">
+                <span
+                  className="inline-block w-2 h-2 rounded-sm flex-shrink-0"
+                  style={{ background: COLORS[i % COLORS.length] }}
+                />
+                {d.category} <span className="font-medium text-gray-800">¥{fmt(d.total)}</span>
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
