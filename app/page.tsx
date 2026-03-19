@@ -5,13 +5,17 @@ import VisitMapWrapper from '../components/VisitMapWrapper'
 export default function Home() {
   return (
     <main className="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold" style={{ color: '#4a7c59' }}>
-          tabilog
-        </h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Every Yen I Spent Traveling
-        </p>
+      <header className="mb-12">
+        <div className="text-center mb-12">
+          <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 shadow-sm inline-block">
+            <h1 className="text-3xl font-bold" style={{ color: '#4a7c59' }}>
+              tabilog
+            </h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Every Yen I Spent Traveling
+            </p>
+          </div>
+        </div>
       </header>
 
       <ExpenseDashboard />
