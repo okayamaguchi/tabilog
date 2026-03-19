@@ -59,13 +59,13 @@ export default function ExpenseDashboard() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+        <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
           <p className="text-xs text-gray-400 mb-1">Total</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
             ¥{totalSpent.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+        <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
           <p className="text-xs text-gray-400 mb-1">Remaining</p>
           <p
             className="text-2xl font-bold font-poppins"
@@ -74,7 +74,7 @@ export default function ExpenseDashboard() {
             {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
           </p>
         </div>
-        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+        <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
           <p className="text-xs text-gray-400 mb-1">Progress</p>
           <p
             className="text-2xl font-bold font-poppins"
@@ -86,7 +86,7 @@ export default function ExpenseDashboard() {
       </div>
 
       {/* Category */}
-      <div className="mt-4 rounded-[32px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+      <div className="mt-4 rounded-[32px] bg-white p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
         <p className="text-xs text-gray-400 mb-4">Category</p>
         <ExpenseCharts byCategory={byCategory} />
       </div>
