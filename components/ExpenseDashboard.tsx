@@ -30,7 +30,7 @@ export default function ExpenseDashboard() {
 
   return (
     <>
-      {/* 💰 Budget タイトル + ボタン（カード外） */}
+      {/* 💰 Budget */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
         <Link
@@ -49,49 +49,45 @@ export default function ExpenseDashboard() {
           ✏️ Add
         </Link>
       </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Total</p>
+          <p className="text-2xl font-bold text-gray-900 font-poppins">
+            ¥{totalSpent.toLocaleString()}
+          </p>
+        </div>
+        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Remaining</p>
+          <p
+            className="text-2xl font-bold font-poppins"
+            style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
+          >
+            {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
+          </p>
+        </div>
+        <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Progress</p>
+          <p
+            className="text-2xl font-bold font-poppins"
+            style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
+          >
+            {usedPercent.toFixed(1)}%
+          </p>
+        </div>
+      </div>
 
-      {/* Budget 白カード: 4カラムグリッド */}
-      <div className="bg-white rounded-[32px] shadow-sm p-6">
-        <div className="grid grid-cols-4 gap-4">
-          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-            <p className="text-xs text-gray-400 mb-1">Total</p>
-            <p className="text-2xl font-bold text-gray-900 font-poppins">
-              ¥{totalSpent.toLocaleString()}
-            </p>
-          </div>
-          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-            <p className="text-xs text-gray-400 mb-1">Remaining</p>
-            <p
-              className="text-2xl font-bold font-poppins"
-              style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
-            >
-              {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
-            </p>
-          </div>
-          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-            <p className="text-xs text-gray-400 mb-1">Progress</p>
-            <p
-              className="text-2xl font-bold font-poppins"
-              style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
-            >
-              {usedPercent.toFixed(1)}%
-            </p>
-          </div>
-          <div className="rounded-[32px] bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)] flex flex-col">
-            <p className="text-xs text-gray-400 mb-3">Category</p>
-            <div className="flex-1">
-              <ExpenseCharts byCategory={byCategory} />
-            </div>
-            <div className="flex justify-end mt-3">
-              <Link
-                href="/expenses"
-                className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
-                style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
-              >
-                Details →
-              </Link>
-            </div>
-          </div>
+      {/* Category */}
+      <div className="mt-6">
+        <p className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>Category</p>
+        <ExpenseCharts byCategory={byCategory} />
+        <div className="flex justify-end mt-4">
+          <Link
+            href="/expenses"
+            className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
+            style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
+          >
+            Details →
+          </Link>
         </div>
       </div>
     </>
