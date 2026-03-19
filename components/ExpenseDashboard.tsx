@@ -39,7 +39,7 @@ export default function ExpenseDashboard() {
             className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
             style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
           >
-            Details →
+            Details
           </Link>
           <Link
             href="/expenses/add"
