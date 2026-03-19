@@ -1,6 +1,6 @@
+import DiarySection from '../components/DiarySection'
 import ExpenseDashboard from '../components/ExpenseDashboard'
 import VisitMapWrapper from '../components/VisitMapWrapper'
-// DiarySection は Task 6 で追加
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
 
       <ExpenseDashboard />
 
-      {/* DiarySection は Task 6 で追加 */}
+      <DiarySection />
 
       {/* 訪問した場所 */}
       <section className="mt-10">
