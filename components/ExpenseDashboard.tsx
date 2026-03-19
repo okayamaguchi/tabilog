@@ -30,27 +30,28 @@ export default function ExpenseDashboard() {
 
   return (
     <>
-      <div className="bg-white rounded-[32px] shadow-sm p-6">
-        {/* 見出し + ボタン */}
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
-          <Link
-            href="/expenses/add"
-            className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
-            style={{ background: '#4a7c59' }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.background = '#81D4FA'
-              ;(e.currentTarget as HTMLElement).style.color = '#1a4a6e'
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.background = '#4a7c59'
-              ;(e.currentTarget as HTMLElement).style.color = 'white'
-            }}
-          >
-            ✏️ Add
-          </Link>
-        </div>
+      {/* 💰 Budget タイトル + ボタン（カード外） */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
+        <Link
+          href="/expenses/add"
+          className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
+          style={{ background: '#4a7c59' }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = '#81D4FA'
+            ;(e.currentTarget as HTMLElement).style.color = '#1a4a6e'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = '#4a7c59'
+            ;(e.currentTarget as HTMLElement).style.color = 'white'
+          }}
+        >
+          ✏️ Add
+        </Link>
+      </div>
 
+      {/* Budget 白カード: 3カード + Category コンテンツ */}
+      <div className="bg-white rounded-[32px] shadow-sm p-6 flex flex-col gap-4">
         {/* 3カラム: Total / Remaining / Progress */}
         <div className="flex gap-4">
           <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
@@ -78,22 +79,21 @@ export default function ExpenseDashboard() {
             </p>
           </div>
         </div>
-      </div>
 
-      {/* 💰 Category */}
-      <section className="bg-white rounded-[32px] shadow-sm p-6">
-        <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
-        <ExpenseCharts byCategory={byCategory} />
-        <div className="flex justify-end mt-4">
-          <Link
-            href="/expenses"
-            className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
-            style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
-          >
-            Details →
-          </Link>
+        {/* Category コンテンツ（白カード） */}
+        <div className="rounded-[32px] p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]" style={{ background: '#f8faf9' }}>
+          <ExpenseCharts byCategory={byCategory} />
+          <div className="flex justify-end mt-4">
+            <Link
+              href="/expenses"
+              className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
+              style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
+            >
+              Details →
+            </Link>
+          </div>
         </div>
-      </section>
+      </div>
     </>
   )
 }
