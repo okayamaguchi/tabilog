@@ -14,11 +14,10 @@ export default function DiarySection() {
         📝 Diary
       </h2>
 
-      {/* 左: Featured大カード / 右: 小カード2×2グリッド */}
-      <div className="flex gap-3 items-stretch">
-        {/* 左: Featured */}
-        <Link href={`/posts/${featured.id}`} className="block group w-1/2 flex-shrink-0">
-          <div className="relative rounded-[32px] overflow-hidden h-full min-h-[300px]">
+      <div className="flex gap-3" style={{ height: '600px' }}>
+        {/* 左: Featured 大カード */}
+        <Link href={`/posts/${featured.id}`} className="block group w-1/2 flex-shrink-0 h-full">
+          <div className="relative rounded-[32px] overflow-hidden h-full">
             <Image
               src={featured.thumbnail}
               alt={featured.title}
@@ -50,10 +49,10 @@ export default function DiarySection() {
         </Link>
 
         {/* 右: 小カード 2×2 */}
-        <div className="flex-1 grid grid-cols-2 gap-3">
+        <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 h-full">
           {small.map((post) => (
-            <Link key={post.id} href={`/posts/${post.id}`} className="block group">
-              <div className="relative rounded-[32px] overflow-hidden h-full min-h-[140px]">
+            <Link key={post.id} href={`/posts/${post.id}`} className="block group h-full">
+              <div className="relative rounded-[32px] overflow-hidden h-full">
                 <Image
                   src={post.thumbnail}
                   alt={post.title}
