@@ -10,7 +10,7 @@ export default function Home() {
           tabilog
         </h1>
         <p className="mt-1 text-sm text-gray-500">
-          Every Yen I Spent Traveling
+          Kanna in Europe
         </p>
       </header>
 
