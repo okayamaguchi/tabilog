@@ -52,11 +52,10 @@ export default function ExpenseDashboard() {
       {/* サマリーカード */}
       <div className="grid grid-cols-2 gap-4">
         <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">Total Spent</p>
+          <p className="text-xs text-gray-400 mb-1">Total</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
             ¥{totalSpent.toLocaleString()}
           </p>
-          <p className="text-xs text-gray-400 mt-1">予算 ¥{BUDGET.toLocaleString()}</p>
         </div>
         <div
           className="rounded-[32px] p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
@@ -67,14 +66,13 @@ export default function ExpenseDashboard() {
             border: `1.5px solid ${remaining >= 0 ? '#4a7c59' : '#ef4444'}`,
           }}
         >
-          <p className="text-xs text-gray-400 mb-1">Budget Remaining</p>
+          <p className="text-xs text-gray-400 mb-1">Remaining</p>
           <p
             className="text-2xl font-bold font-poppins"
             style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
           >
             {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
           </p>
-          <p className="text-xs text-gray-400 mt-1">使用率 {usedPercent.toFixed(1)}%</p>
         </div>
       </div>
 
