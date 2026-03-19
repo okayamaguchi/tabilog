@@ -30,9 +30,9 @@ export default function ExpenseDashboard() {
 
   return (
     <>
-      {/* 💰 Budget */}
+      {/* 💪 Budget */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
+        <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💪 Budget</h2>
         <div className="flex items-center gap-2">
           <Link
             href="/expenses"
