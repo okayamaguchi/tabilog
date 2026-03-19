@@ -34,6 +34,15 @@ const COLORS = [
   '#e8f5ee',
 ]
 
+const GRADIENTS: [string, string][] = [
+  ['#2e4a38', '#4a7c59'],
+  ['#4a7c59', '#6fa882'],
+  ['#6fa882', '#95c4a8'],
+  ['#95c4a8', '#bddece'],
+  ['#bddece', '#d4ece0'],
+  ['#d4ece0', '#e8f5ee'],
+]
+
 const fmt = (v: number) =>
   v >= 10000
     ? `${(v / 10000).toFixed(v % 10000 === 0 ? 0 : 1)}万`
@@ -59,6 +68,14 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                   layout="vertical"
                   margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
                 >
+                  <defs>
+                    {byCategory.map((_, i) => (
+                      <linearGradient key={i} id={`grad-${i}`} x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor={GRADIENTS[i % GRADIENTS.length][0]} />
+                        <stop offset="100%" stopColor={GRADIENTS[i % GRADIENTS.length][1]} />
+                      </linearGradient>
+                    ))}
+                  </defs>
                   <XAxis type="number" hide />
                   <YAxis type="category" hide width={0} />
                   {byCategory.map((d, i) => (
@@ -66,7 +83,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                       key={d.category}
                       dataKey={d.category}
                       stackId="stack"
-                      fill={COLORS[i % COLORS.length]}
+                      fill={`url(#grad-${i})`}
                       radius={
                         i === 0
                           ? [4, 0, 0, 4]
@@ -85,7 +102,9 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                 <li key={d.category} className="flex items-center gap-2 text-sm">
                   <span
                     className="inline-block w-3 h-3 rounded-sm flex-shrink-0"
-                    style={{ background: COLORS[i % COLORS.length] }}
+                    style={{
+                      background: `linear-gradient(to right, ${GRADIENTS[i % GRADIENTS.length][0]}, ${GRADIENTS[i % GRADIENTS.length][1]})`,
+                    }}
                   />
                   <span className="flex-1 text-gray-700">{d.category}</span>
                   <span className="font-semibold text-gray-900 font-poppins tabular-nums">
