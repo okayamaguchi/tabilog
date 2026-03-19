@@ -9,8 +9,8 @@ export default function Home() {
         <h1 className="text-3xl font-bold" style={{ color: '#4a7c59' }}>
           tabilog
         </h1>
-        <p className="mt-1 text-sm" style={{ color: '#4a7c59' }}>
-          旅の費用トラッキング
+        <p className="mt-1 text-sm text-gray-500">
+          Every Yen I Spent Traveling
         </p>
       </header>
 
