@@ -45,12 +45,12 @@ export default function ExpenseDashboard() {
             ;(e.currentTarget as HTMLElement).style.color = 'white'
           }}
         >
-          ✏️ Add Expense
+          ✏️ Add
         </Link>
       </div>
 
       {/* サマリーカード */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
           <p className="text-xs text-gray-400 mb-1">Total Spent</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
@@ -75,28 +75,6 @@ export default function ExpenseDashboard() {
             {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
           </p>
           <p className="text-xs text-gray-400 mt-1">使用率 {usedPercent.toFixed(1)}%</p>
-        </div>
-        {/* 3列目: PC のみ表示 */}
-        <div className="hidden md:block rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">カテゴリ内訳</p>
-          <div className="flex items-end gap-1 h-9 mt-2">
-            {byCategory.slice(0, 5).map((d, i) => {
-              const max = byCategory[0]?.total ?? 1
-              const pct = Math.max((d.total / max) * 100, 8)
-              const colors = ['#4a7c59', '#81D4FA', '#6fa882', '#E3F2FD', '#95c4a8']
-              return (
-                <div
-                  key={d.category}
-                  className="flex-1 rounded-t-sm"
-                  style={{ height: `${pct}%`, background: colors[i] }}
-                  title={d.category}
-                />
-              )
-            })}
-          </div>
-          <p className="text-xs text-gray-400 mt-1">
-            {byCategory[0]?.category ?? ''}が最多
-          </p>
         </div>
       </div>
 
@@ -131,7 +109,7 @@ export default function ExpenseDashboard() {
           className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
           style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
         >
-          View Details →
+          Details →
         </Link>
       </div>
     </>

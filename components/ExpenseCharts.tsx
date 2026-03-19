@@ -48,7 +48,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
       {showPie && (
         <div>
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-            💰 Spending by Category
+            💰 Category
           </h3>
           {/* 2カラム: 左=積み上げ横棒グラフ、右=カテゴリリスト */}
           <div className="flex gap-8 items-stretch">
@@ -64,10 +64,6 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                 >
                   <XAxis type="number" hide />
                   <YAxis type="category" hide width={0} />
-                  <Tooltip
-                    formatter={(value, name) => [`¥${Number(value).toLocaleString()}`, String(name)]}
-                    cursor={{ fill: 'rgba(0,0,0,0.04)' }}
-                  />
                   {byCategory.map((d, i) => (
                     <Bar
                       key={d.category}
