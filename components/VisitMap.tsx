@@ -18,7 +18,7 @@ export default function VisitMap() {
     <MapContainer
       center={[47, 10]}
       zoom={4}
-      style={{ height: '400px', width: '100%' }}
+      className="h-[350px] md:h-[500px]"
       scrollWheelZoom={false}
     >
       <TileLayer
