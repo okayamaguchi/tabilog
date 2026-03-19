@@ -50,55 +50,31 @@ export default function ExpenseDashboard() {
         </Link>
       </div>
 
-      {/* 2カラム: 左=Total+Remaining縦積み、右=Progressバー */}
-      <div className="flex gap-4 items-stretch">
-        {/* 左: 2カード縦積み */}
-        <div className="flex-1 flex flex-col gap-4">
-          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-            <p className="text-xs text-gray-400 mb-1">Total</p>
-            <p className="text-2xl font-bold text-gray-900 font-poppins">
-              ¥{totalSpent.toLocaleString()}
-            </p>
-          </div>
-          <div
-            className="rounded-[32px] p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
-            style={{
-              background: remaining >= 0
-                ? 'linear-gradient(135deg, #f0f7f3, #E3F2FD)'
-                : '#fff0f0',
-              border: `1.5px solid ${remaining >= 0 ? '#4a7c59' : '#ef4444'}`,
-            }}
-          >
-            <p className="text-xs text-gray-400 mb-1">Remaining</p>
-            <p
-              className="text-2xl font-bold font-poppins"
-              style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
-            >
-              {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
-            </p>
-          </div>
+      {/* 3カラム: Total / Remaining / Progress */}
+      <div className="flex gap-4">
+        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Total</p>
+          <p className="text-2xl font-bold text-gray-900 font-poppins">
+            ¥{totalSpent.toLocaleString()}
+          </p>
         </div>
-
-        {/* 右: Progressバー（縦いっぱい） */}
-        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between">
-          <div className="flex justify-between text-xs text-gray-400 mb-3">
-            <span>Progress</span>
-            <span className="font-semibold font-poppins" style={{ color: '#4a7c59' }}>
-              {usedPercent.toFixed(1)}%
-            </span>
-          </div>
-          {/* 縦向きプログレスバー */}
-          <div className="flex-1 rounded-full overflow-hidden flex flex-col-reverse" style={{ background: '#E3F2FD' }}>
-            <div
-              className="w-full rounded-full transition-all"
-              style={{
-                height: `${usedPercent}%`,
-                background: usedPercent >= 90
-                  ? '#ef4444'
-                  : 'linear-gradient(0deg, #4a7c59, #81D4FA)',
-              }}
-            />
-          </div>
+        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Remaining</p>
+          <p
+            className="text-2xl font-bold font-poppins"
+            style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
+          >
+            {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
+          </p>
+        </div>
+        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <p className="text-xs text-gray-400 mb-1">Progress</p>
+          <p
+            className="text-2xl font-bold font-poppins"
+            style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
+          >
+            {usedPercent.toFixed(1)}%
+          </p>
         </div>
       </div>
 
