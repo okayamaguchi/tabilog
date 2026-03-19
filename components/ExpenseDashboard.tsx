@@ -30,51 +30,53 @@ export default function ExpenseDashboard() {
 
   return (
     <>
-      {/* 見出し + ボタン */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
-        <Link
-          href="/expenses/add"
-          className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
-          style={{ background: '#4a7c59' }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.background = '#81D4FA'
-            ;(e.currentTarget as HTMLElement).style.color = '#1a4a6e'
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = '#4a7c59'
-            ;(e.currentTarget as HTMLElement).style.color = 'white'
-          }}
-        >
-          ✏️ Add
-        </Link>
-      </div>
+      <div className="bg-white rounded-[32px] shadow-sm p-6">
+        {/* 見出し + ボタン */}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
+          <Link
+            href="/expenses/add"
+            className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
+            style={{ background: '#4a7c59' }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = '#81D4FA'
+              ;(e.currentTarget as HTMLElement).style.color = '#1a4a6e'
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = '#4a7c59'
+              ;(e.currentTarget as HTMLElement).style.color = 'white'
+            }}
+          >
+            ✏️ Add
+          </Link>
+        </div>
 
-      {/* 3カラム: Total / Remaining / Progress */}
-      <div className="flex gap-4">
-        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">Total</p>
-          <p className="text-2xl font-bold text-gray-900 font-poppins">
-            ¥{totalSpent.toLocaleString()}
-          </p>
-        </div>
-        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">Remaining</p>
-          <p
-            className="text-2xl font-bold font-poppins"
-            style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
-          >
-            {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
-          </p>
-        </div>
-        <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">Progress</p>
-          <p
-            className="text-2xl font-bold font-poppins"
-            style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
-          >
-            {usedPercent.toFixed(1)}%
-          </p>
+        {/* 3カラム: Total / Remaining / Progress */}
+        <div className="flex gap-4">
+          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+            <p className="text-xs text-gray-400 mb-1">Total</p>
+            <p className="text-2xl font-bold text-gray-900 font-poppins">
+              ¥{totalSpent.toLocaleString()}
+            </p>
+          </div>
+          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+            <p className="text-xs text-gray-400 mb-1">Remaining</p>
+            <p
+              className="text-2xl font-bold font-poppins"
+              style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
+            >
+              {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
+            </p>
+          </div>
+          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+            <p className="text-xs text-gray-400 mb-1">Progress</p>
+            <p
+              className="text-2xl font-bold font-poppins"
+              style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
+            >
+              {usedPercent.toFixed(1)}%
+            </p>
+          </div>
         </div>
       </div>
 
