@@ -60,13 +60,13 @@ export default function ExpenseDashboard() {
       </div>
       <div className="grid grid-cols-3 gap-4">
         <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-          <p className="text-xs text-gray-400 mb-1">Total</p>
+          <p className="text-xs text-gray-400 mb-1">💰 Total</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
             ¥{totalSpent.toLocaleString()}
           </p>
         </div>
         <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-          <p className="text-xs text-gray-400 mb-1">Remaining</p>
+          <p className="text-xs text-gray-400 mb-1">💵 Remaining</p>
           <p
             className="text-2xl font-bold font-poppins"
             style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
@@ -75,7 +75,7 @@ export default function ExpenseDashboard() {
           </p>
         </div>
         <div className="rounded-[32px] bg-white p-5 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-          <p className="text-xs text-gray-400 mb-1">Progress</p>
+          <p className="text-xs text-gray-400 mb-1">📊 Progress</p>
           <p
             className="text-2xl font-bold font-poppins"
             style={{ color: usedPercent >= 90 ? '#ef4444' : '#4a7c59' }}
@@ -87,7 +87,7 @@ export default function ExpenseDashboard() {
 
       {/* Category */}
       <div className="mt-4 rounded-[32px] bg-white p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
-        <p className="text-xs text-gray-400 mb-4">Category</p>
+        <p className="text-xs text-gray-400 mb-4">📂 Category</p>
         <ExpenseCharts byCategory={byCategory} />
       </div>
     </>
