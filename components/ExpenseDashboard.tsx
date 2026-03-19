@@ -80,17 +80,17 @@ export default function ExpenseDashboard() {
 
       {/* Category */}
       <h2 className="text-sm font-semibold mt-6 mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
-      <ExpenseCharts byCategory={byCategory} />
-
-      {/* 詳しく見るリンク */}
-      <div className="flex justify-end mt-4">
-        <Link
-          href="/expenses"
-          className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
-          style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
-        >
-          Details →
-        </Link>
+      <div className="bg-white rounded-[32px] shadow-sm p-6">
+        <ExpenseCharts byCategory={byCategory} />
+        <div className="flex justify-end mt-4">
+          <Link
+            href="/expenses"
+            className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
+            style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
+          >
+            Details →
+          </Link>
+        </div>
       </div>
     </>
   )
