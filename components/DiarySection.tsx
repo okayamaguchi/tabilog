@@ -5,6 +5,8 @@ import { posts } from '../lib/posts'
 export default function DiarySection() {
   const [featured, ...rest] = posts
 
+  if (!featured) return null
+
   return (
     <section className="mt-10">
       <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
