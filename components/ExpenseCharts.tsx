@@ -53,42 +53,48 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
             カテゴリ別支出
           </h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <PieChart>
-              <Pie
-                data={byCategory}
-                dataKey="total"
-                nameKey="category"
-                cx="50%"
-                cy="50%"
-                outerRadius={90}
-                label={({ name, percent }: { name?: string; percent?: number }) =>
-                  `${name ?? ''} ${((percent ?? 0) * 100).toFixed(0)}%`
-                }
-                labelLine={false}
-              >
-                {byCategory.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip
-                formatter={(value) => [`¥${Number(value).toLocaleString()}`, '金額']}
-                position={{ x: 4, y: 4 }}
-                wrapperStyle={{ maxWidth: '155px' }}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-          {/* Legend */}
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-            {byCategory.map((d, i) => (
-              <span key={d.category} className="flex items-center gap-1 text-xs text-gray-600 whitespace-nowrap">
-                <span
-                  className="inline-block w-2 h-2 rounded-sm flex-shrink-0"
-                  style={{ background: COLORS[i % COLORS.length] }}
-                />
-                {d.category} <span className="font-medium text-gray-800">¥{fmt(d.total)}</span>
-              </span>
-            ))}
+          {/* 2カラム: 左=円グラフ、右=カテゴリリスト */}
+          <div className="flex gap-6 items-center">
+            <div className="flex-shrink-0 w-[220px]">
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie
+                    data={byCategory}
+                    dataKey="total"
+                    nameKey="category"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={90}
+                    label={false}
+                    labelLine={false}
+                  >
+                    {byCategory.map((_, i) => (
+                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value) => [`¥${Number(value).toLocaleString()}`, '金額']}
+                    position={{ x: 4, y: 4 }}
+                    wrapperStyle={{ maxWidth: '155px' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            {/* カテゴリリスト */}
+            <ul className="flex-1 space-y-2.5">
+              {byCategory.map((d, i) => (
+                <li key={d.category} className="flex items-center gap-2 text-sm">
+                  <span
+                    className="inline-block w-3 h-3 rounded-sm flex-shrink-0"
+                    style={{ background: COLORS[i % COLORS.length] }}
+                  />
+                  <span className="flex-1 text-gray-700">{d.category}</span>
+                  <span className="font-semibold text-gray-900 font-poppins tabular-nums">
+                    ¥{d.total.toLocaleString()}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
