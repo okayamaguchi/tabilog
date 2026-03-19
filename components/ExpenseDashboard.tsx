@@ -30,8 +30,9 @@ export default function ExpenseDashboard() {
 
   return (
     <>
-      {/* ボタン行 */}
-      <div className="flex justify-end mb-4">
+      {/* 見出し + ボタン */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-sm font-semibold" style={{ color: '#4a7c59' }}>💰 Budget</h2>
         <Link
           href="/expenses/add"
           className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
@@ -77,14 +78,14 @@ export default function ExpenseDashboard() {
       </div>
 
       {/* プログレスバー */}
-      <div className="mt-4 rounded-[32px] bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-        <div className="flex justify-between text-xs text-gray-400 mb-2">
+      <div className="mt-3">
+        <div className="flex justify-between text-xs text-gray-400 mb-1.5">
           <span>Progress</span>
           <span className="font-semibold font-poppins" style={{ color: '#4a7c59' }}>
             {usedPercent.toFixed(1)}%
           </span>
         </div>
-        <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: '#E3F2FD' }}>
+        <div className="w-full h-2.5 rounded-full overflow-hidden" style={{ background: '#E3F2FD' }}>
           <div
             className="h-full rounded-full transition-all"
             style={{
