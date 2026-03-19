@@ -80,8 +80,9 @@ export default function ExpenseDashboard() {
           </div>
         </div>
 
-        {/* Category コンテンツ（白カード） */}
-        <div className="rounded-[32px] p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]" style={{ background: '#f8faf9' }}>
+        {/* Category */}
+        <div>
+          <p className="text-xs text-gray-400 mb-3">Category</p>
           <ExpenseCharts byCategory={byCategory} />
           <div className="flex justify-end mt-4">
             <Link
