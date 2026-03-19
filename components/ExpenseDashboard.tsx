@@ -77,7 +77,7 @@ export default function ExpenseDashboard() {
       </div>
 
       {/* Category */}
-      <div className="mt-6">
+      <div className="mt-4 rounded-[32px] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
         <p className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>Category</p>
         <ExpenseCharts byCategory={byCategory} />
         <div className="flex justify-end mt-4">
