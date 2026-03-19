@@ -36,8 +36,16 @@ export default function ExpenseDashboard() {
         <div className="flex items-center gap-2">
           <Link
             href="/expenses"
-            className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
-            style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
+            className="text-sm font-semibold px-5 py-2.5 rounded-full text-white transition-colors duration-200"
+            style={{ background: '#4a7c59' }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = '#81D4FA'
+              ;(e.currentTarget as HTMLElement).style.color = '#1a4a6e'
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = '#4a7c59'
+              ;(e.currentTarget as HTMLElement).style.color = 'white'
+            }}
           >
             Details
           </Link>
