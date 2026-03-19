@@ -46,11 +46,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
   return (
     <div className={showPie && showBar ? 'grid grid-cols-1 md:grid-cols-2 gap-8 mt-4' : 'mt-4'}>
       {showPie && (
-        <div>
-          <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-            💰 Category
-          </h3>
-          <div className="bg-white rounded-[32px] shadow-sm p-6">
+        <div className="bg-white rounded-[32px] shadow-sm p-6">
           {/* 2カラム: 左=積み上げ横棒グラフ、右=カテゴリリスト */}
           <div className="flex gap-8 items-stretch">
             {/* 左: 積み上げ横棒グラフ */}
@@ -98,7 +94,6 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                 </li>
               ))}
             </ul>
-          </div>
           </div>
         </div>
       )}

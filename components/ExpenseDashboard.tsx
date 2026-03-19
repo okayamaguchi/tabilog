@@ -78,7 +78,8 @@ export default function ExpenseDashboard() {
         </div>
       </div>
 
-      {/* カテゴリ円グラフのみ（byDate は渡さない → 棒グラフ非表示） */}
+      {/* Category */}
+      <h2 className="text-sm font-semibold mt-6 mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
       <ExpenseCharts byCategory={byCategory} />
 
       {/* 詳しく見るリンク */}
