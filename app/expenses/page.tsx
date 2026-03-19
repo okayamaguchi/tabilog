@@ -9,9 +9,9 @@ export default function ExpensesPage() {
         className="text-sm font-medium mb-6 inline-block"
         style={{ color: '#4a7c59' }}
       >
-        ← TOPに戻る
+        ← Back to Top
       </Link>
-      <h1 className="text-2xl font-bold text-gray-900 mb-8">費用詳細</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-8">Expense Details</h1>
       <ExpensesPageContent />
     </main>
   )

@@ -52,10 +52,10 @@ export default function ExpensesPageContent() {
       {/* 費用一覧 */}
       <div className="rounded-[32px] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)] overflow-hidden">
         <div className="grid grid-cols-[80px_90px_1fr_90px] gap-2 px-5 py-3 border-b border-gray-100">
-          <span className="text-xs text-gray-400 font-semibold uppercase">日付</span>
-          <span className="text-xs text-gray-400 font-semibold uppercase">カテゴリ</span>
-          <span className="text-xs text-gray-400 font-semibold uppercase">メモ</span>
-          <span className="text-xs text-gray-400 font-semibold uppercase text-right">金額</span>
+          <span className="text-xs text-gray-400 font-semibold uppercase">Date</span>
+          <span className="text-xs text-gray-400 font-semibold uppercase">Category</span>
+          <span className="text-xs text-gray-400 font-semibold uppercase">Note</span>
+          <span className="text-xs text-gray-400 font-semibold uppercase text-right">Amount</span>
         </div>
         {sorted.map((e) => (
           <div

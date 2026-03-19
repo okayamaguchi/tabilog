@@ -110,7 +110,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
       {showBar && (
         <div>
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-            日別支出推移
+            Daily Spending
           </h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={byDate} margin={{ top: 4, right: 8, left: 0, bottom: 40 }}>
@@ -128,7 +128,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                 width={40}
               />
               <Tooltip
-                formatter={(value) => [`¥${Number(value).toLocaleString()}`, '支出']}
+                formatter={(value) => [`¥${Number(value).toLocaleString()}`, 'Amount']}
                 labelStyle={{ fontSize: 11 }}
               />
               <Bar dataKey="amount" fill="#4a7c59" radius={[3, 3, 0, 0]} />
