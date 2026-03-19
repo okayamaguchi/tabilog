@@ -50,17 +50,16 @@ export default function ExpenseDashboard() {
         </Link>
       </div>
 
-      {/* Budget 白カード: 3カード + Category コンテンツ */}
-      <div className="bg-white rounded-[32px] shadow-sm p-6 flex flex-col gap-4">
-        {/* 3カラム: Total / Remaining / Progress */}
-        <div className="flex gap-4">
-          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+      {/* Budget 白カード: 4カラムグリッド */}
+      <div className="bg-white rounded-[32px] shadow-sm p-6">
+        <div className="grid grid-cols-4 gap-4">
+          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
             <p className="text-xs text-gray-400 mb-1">Total</p>
             <p className="text-2xl font-bold text-gray-900 font-poppins">
               ¥{totalSpent.toLocaleString()}
             </p>
           </div>
-          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
             <p className="text-xs text-gray-400 mb-1">Remaining</p>
             <p
               className="text-2xl font-bold font-poppins"
@@ -69,7 +68,7 @@ export default function ExpenseDashboard() {
               {remaining >= 0 ? '' : '-'}¥{Math.abs(remaining).toLocaleString()}
             </p>
           </div>
-          <div className="flex-1 rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+          <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
             <p className="text-xs text-gray-400 mb-1">Progress</p>
             <p
               className="text-2xl font-bold font-poppins"
@@ -78,20 +77,20 @@ export default function ExpenseDashboard() {
               {usedPercent.toFixed(1)}%
             </p>
           </div>
-        </div>
-
-        {/* Category */}
-        <div>
-          <p className="text-xs text-gray-400 mb-3">Category</p>
-          <ExpenseCharts byCategory={byCategory} />
-          <div className="flex justify-end mt-4">
-            <Link
-              href="/expenses"
-              className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
-              style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
-            >
-              Details →
-            </Link>
+          <div className="rounded-[32px] bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)] flex flex-col">
+            <p className="text-xs text-gray-400 mb-3">Category</p>
+            <div className="flex-1">
+              <ExpenseCharts byCategory={byCategory} />
+            </div>
+            <div className="flex justify-end mt-3">
+              <Link
+                href="/expenses"
+                className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
+                style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
+              >
+                Details →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
