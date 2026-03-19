@@ -48,13 +48,13 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
       {showPie && (
         <div>
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-            カテゴリ別支出
+            💰 Spending by Category
           </h3>
           {/* 2カラム: 左=積み上げ横棒グラフ、右=カテゴリリスト */}
           <div className="flex gap-8 items-stretch">
             {/* 左: 積み上げ横棒グラフ */}
-            <div className="flex-1 flex flex-col justify-center">
-              <ResponsiveContainer width="100%" height={44}>
+            <div className="w-1/2 flex flex-col justify-center">
+              <ResponsiveContainer width="100%" height={120}>
                 <BarChart
                   data={[byCategory.reduce<Record<string, number>>(
                     (acc, d) => ({ ...acc, [d.category]: d.total }), {}
@@ -87,7 +87,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
               </ResponsiveContainer>
             </div>
             {/* 右: カテゴリリスト */}
-            <ul className="w-52 flex-shrink-0 space-y-2">
+            <ul className="w-1/2 flex-shrink-0 space-y-2.5 justify-center flex flex-col">
               {byCategory.map((d, i) => (
                 <li key={d.category} className="flex items-center gap-2 text-sm">
                   <span

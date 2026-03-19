@@ -10,7 +10,7 @@ export default function DiarySection() {
   return (
     <section className="mt-10">
       <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
-        ✈️ 旅の日記
+        ✈️ Travel Diary
       </h2>
 
       {/* Featured */}

@@ -45,14 +45,14 @@ export default function ExpenseDashboard() {
             ;(e.currentTarget as HTMLElement).style.color = 'white'
           }}
         >
-          ✏️ 費用を入力
+          ✏️ Add Expense
         </Link>
       </div>
 
       {/* サマリーカード */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="rounded-[32px] bg-white p-5 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-          <p className="text-xs text-gray-400 mb-1">総支出</p>
+          <p className="text-xs text-gray-400 mb-1">Total Spent</p>
           <p className="text-2xl font-bold text-gray-900 font-poppins">
             ¥{totalSpent.toLocaleString()}
           </p>
@@ -67,7 +67,7 @@ export default function ExpenseDashboard() {
             border: `1.5px solid ${remaining >= 0 ? '#4a7c59' : '#ef4444'}`,
           }}
         >
-          <p className="text-xs text-gray-400 mb-1">予算残高</p>
+          <p className="text-xs text-gray-400 mb-1">Budget Remaining</p>
           <p
             className="text-2xl font-bold font-poppins"
             style={{ color: remaining >= 0 ? '#4a7c59' : '#ef4444' }}
@@ -103,7 +103,7 @@ export default function ExpenseDashboard() {
       {/* プログレスバー */}
       <div className="mt-4 rounded-[32px] bg-white p-4 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
         <div className="flex justify-between text-xs text-gray-400 mb-2">
-          <span>支出進捗</span>
+          <span>Progress</span>
           <span className="font-semibold font-poppins" style={{ color: '#4a7c59' }}>
             {usedPercent.toFixed(1)}%
           </span>
@@ -131,7 +131,7 @@ export default function ExpenseDashboard() {
           className="text-sm font-semibold px-4 py-2 rounded-full border transition-colors duration-200"
           style={{ color: '#4a7c59', borderColor: '#4a7c59' }}
         >
-          詳しく見る →
+          View Details →
         </Link>
       </div>
     </>
