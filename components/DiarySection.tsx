@@ -37,7 +37,7 @@ export default function DiarySection() {
                   boxShadow: '2px 2px 6px rgba(0,0,0,0.18)',
                 }}
               >
-                ✈️ 最新の旅
+                ✈️ Latest
               </span>
               <p className="text-white font-bold text-lg leading-snug">
                 {featured.title}
