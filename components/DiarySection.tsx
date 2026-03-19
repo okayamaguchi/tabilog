@@ -10,7 +10,7 @@ export default function DiarySection() {
 
   return (
     <section className="mt-12">
-      <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
+      <h2 className="text-base font-semibold mb-4" style={{ color: '#4a7c59' }}>
         📝 Diary
       </h2>
 
