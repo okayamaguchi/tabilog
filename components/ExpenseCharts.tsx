@@ -1,9 +1,6 @@
 'use client'
 
 import {
-  PieChart,
-  Pie,
-  Cell,
   Tooltip,
   ResponsiveContainer,
   BarChart,
@@ -53,35 +50,44 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
             カテゴリ別支出
           </h3>
-          {/* 2カラム: 左=円グラフ、右=カテゴリリスト */}
-          <div className="flex gap-6 items-center">
-            <div className="flex-shrink-0 w-[220px]">
-              <ResponsiveContainer width="100%" height={220}>
-                <PieChart>
-                  <Pie
-                    data={byCategory}
-                    dataKey="total"
-                    nameKey="category"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={90}
-                    label={false}
-                    labelLine={false}
-                  >
-                    {byCategory.map((_, i) => (
-                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                    ))}
-                  </Pie>
+          {/* 2カラム: 左=積み上げ横棒グラフ、右=カテゴリリスト */}
+          <div className="flex gap-8 items-stretch">
+            {/* 左: 積み上げ横棒グラフ */}
+            <div className="flex-1 flex flex-col justify-center">
+              <ResponsiveContainer width="100%" height={44}>
+                <BarChart
+                  data={[byCategory.reduce<Record<string, number>>(
+                    (acc, d) => ({ ...acc, [d.category]: d.total }), {}
+                  )]}
+                  layout="vertical"
+                  margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                >
+                  <XAxis type="number" hide />
+                  <YAxis type="category" hide width={0} />
                   <Tooltip
-                    formatter={(value) => [`¥${Number(value).toLocaleString()}`, '金額']}
-                    position={{ x: 4, y: 4 }}
-                    wrapperStyle={{ maxWidth: '155px' }}
+                    formatter={(value, name) => [`¥${Number(value).toLocaleString()}`, String(name)]}
+                    cursor={{ fill: 'rgba(0,0,0,0.04)' }}
                   />
-                </PieChart>
+                  {byCategory.map((d, i) => (
+                    <Bar
+                      key={d.category}
+                      dataKey={d.category}
+                      stackId="stack"
+                      fill={COLORS[i % COLORS.length]}
+                      radius={
+                        i === 0
+                          ? [4, 0, 0, 4]
+                          : i === byCategory.length - 1
+                          ? [0, 4, 4, 0]
+                          : [0, 0, 0, 0]
+                      }
+                    />
+                  ))}
+                </BarChart>
               </ResponsiveContainer>
             </div>
-            {/* カテゴリリスト */}
-            <ul className="flex-1 space-y-2.5">
+            {/* 右: カテゴリリスト */}
+            <ul className="w-52 flex-shrink-0 space-y-2">
               {byCategory.map((d, i) => (
                 <li key={d.category} className="flex items-center gap-2 text-sm">
                   <span
