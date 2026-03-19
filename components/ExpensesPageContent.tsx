@@ -51,7 +51,7 @@ export default function ExpensesPageContent() {
 
       {/* 費用一覧 */}
       <div className="rounded-[32px] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)] overflow-hidden">
-        <div className="grid grid-cols-[80px_90px_1fr_90px] gap-2 px-5 py-3 border-b border-gray-100">
+        <div className="grid grid-cols-[120px_140px_1fr_120px] gap-2 px-5 py-3 border-b border-gray-100">
           <span className="text-xs text-gray-400 font-semibold uppercase">Date</span>
           <span className="text-xs text-gray-400 font-semibold uppercase">Category</span>
           <span className="text-xs text-gray-400 font-semibold uppercase">Note</span>
@@ -60,7 +60,7 @@ export default function ExpensesPageContent() {
         {sorted.map((e) => (
           <div
             key={e.id}
-            className="grid grid-cols-[80px_90px_1fr_90px] gap-2 px-5 py-3 border-b border-gray-50 last:border-0 items-center"
+            className="grid grid-cols-[120px_140px_1fr_120px] gap-2 px-5 py-3 border-b border-gray-50 last:border-0 items-center"
           >
             <span className="text-xs text-gray-500 font-poppins">{e.date}</span>
             <span>
