@@ -80,8 +80,8 @@ export default function ExpenseDashboard() {
         </div>
       </div>
 
-      {/* Category */}
-      <div className="bg-white rounded-[32px] shadow-sm p-6 mt-6">
+      {/* 💰 Category */}
+      <section className="bg-white rounded-[32px] shadow-sm p-6">
         <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
         <ExpenseCharts byCategory={byCategory} />
         <div className="flex justify-end mt-4">
@@ -93,7 +93,7 @@ export default function ExpenseDashboard() {
             Details →
           </Link>
         </div>
-      </div>
+      </section>
     </>
   )
 }
