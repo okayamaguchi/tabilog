@@ -10,21 +10,21 @@ import { loadLocalExpenses } from '../lib/localExpenses'
 import ExpenseCharts from './ExpenseCharts'
 
 const CATEGORY_COLORS: Record<string, string> = {
-  '交通費':      '#4a7c59',
-  '宿泊費':      '#81D4FA',
-  '食費':        '#6fa882',
-  '観光':        '#95c4a8',
-  'ショッピング': '#E3F2FD',
-  'その他':      '#d4ece0',
+  'Transport': '#4a7c59',
+  'Stay':      '#81D4FA',
+  'Food':      '#6fa882',
+  'Tours':     '#95c4a8',
+  'Shopping':  '#E3F2FD',
+  'Other':     '#d4ece0',
 }
 
 const CATEGORY_EMOJI: Record<string, string> = {
-  '交通費':      '🚆',
-  '宿泊費':      '🏨',
-  '食費':        '🍔',
-  '観光':        '🎭',
-  'ショッピング': '🛍️',
-  'その他':      '📦',
+  'Transport': '🚆',
+  'Stay':      '🏨',
+  'Food':      '🍔',
+  'Tours':     '🎭',
+  'Shopping':  '🛍️',
+  'Other':     '📦',
 }
 
 export default function ExpensesPageContent() {
@@ -68,7 +68,7 @@ export default function ExpensesPageContent() {
                 className="text-xs font-semibold px-2 py-0.5 rounded-full"
                 style={{
                   background: CATEGORY_COLORS[e.category] ?? '#f3f4f6',
-                  color: e.category === 'ショッピング' || e.category === 'その他'
+                  color: e.category === 'Shopping' || e.category === 'Other'
                     ? '#4a7c59'
                     : 'white',
                 }}
