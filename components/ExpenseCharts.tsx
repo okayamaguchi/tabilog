@@ -44,7 +44,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
   const showBar = byDate && byDate.length > 0
 
   return (
-    <div className={showPie && showBar ? 'grid grid-cols-1 md:grid-cols-2 gap-8 mt-8' : 'mt-8'}>
+    <div className={showPie && showBar ? 'grid grid-cols-1 md:grid-cols-2 gap-8 mt-4' : 'mt-4'}>
       {showPie && (
         <div className="bg-white rounded-[32px] shadow-sm p-6">
           <h3 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>
