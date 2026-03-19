@@ -81,8 +81,8 @@ export default function ExpenseDashboard() {
       </div>
 
       {/* Category */}
-      <h2 className="text-sm font-semibold mt-6 mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
-      <div className="bg-white rounded-[32px] shadow-sm p-6">
+      <div className="bg-white rounded-[32px] shadow-sm p-6 mt-6">
+        <h2 className="text-sm font-semibold mb-4" style={{ color: '#4a7c59' }}>💰 Category</h2>
         <ExpenseCharts byCategory={byCategory} />
         <div className="flex justify-end mt-4">
           <Link
