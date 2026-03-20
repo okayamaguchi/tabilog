@@ -1,8 +1,12 @@
 import DiarySection from '../components/DiarySection'
 import ExpenseDashboard from '../components/ExpenseDashboard'
 import VisitMapWrapper from '../components/VisitMapWrapper'
+import { getNotionPlaces } from '../lib/places'
+import { visits as mockVisits } from '../lib/visits'
 
-export default function Home() {
+export default async function Home() {
+  const notionPlaces = await getNotionPlaces()
+  const visits = notionPlaces.length > 0 ? notionPlaces : mockVisits
   return (
     <main className="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
       <header className="mb-12">
@@ -24,7 +28,7 @@ export default function Home() {
           📍 Places
         </h2>
         <div className="rounded-[32px] overflow-hidden shadow-sm">
-          <VisitMapWrapper />
+          <VisitMapWrapper visits={visits} />
         </div>
       </section>
     </main>

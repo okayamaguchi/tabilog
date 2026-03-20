@@ -3,7 +3,7 @@
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { visits } from '../lib/visits'
+import type { Visit } from '../lib/visits'
 
 const markerIcon = L.divIcon({
   className: '',
@@ -13,7 +13,7 @@ const markerIcon = L.divIcon({
   popupAnchor: [0, -10],
 })
 
-export default function VisitMap() {
+export default function VisitMap({ visits }: { visits: Visit[] }) {
   return (
     <MapContainer
       center={[47, 10]}

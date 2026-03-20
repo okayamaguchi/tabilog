@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { posts } from '../lib/posts'
+import { posts as mockPosts } from '../lib/posts'
+import { getDiaryPosts } from '../lib/diary'
 
-export default function DiarySection() {
-  const shuffled = [...posts].sort(() => Math.random() - 0.5)
+export default async function DiarySection() {
+  const notionPosts = await getDiaryPosts()
+  const source = notionPosts.length > 0 ? notionPosts : mockPosts
+  const shuffled = [...source].sort(() => Math.random() - 0.5)
   const featured = shuffled[0]
   const small = shuffled.slice(1, 5)
 
