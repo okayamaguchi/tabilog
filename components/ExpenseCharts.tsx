@@ -54,10 +54,12 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             <div className="flex gap-8 items-stretch">
               {/* 左: カスタム分割バー */}
               <div className="w-1/2 flex flex-col justify-center">
-                <div className="flex h-8 rounded-[16px] overflow-hidden">
+                <div className="flex h-8" onMouseLeave={() => setHoveredCategory(null)}>
                   {byCategory.map((d, i) => {
                     const pct = (d.total / total) * 100
                     const isHovered = hoveredCategory === d.category
+                    const isFirst = i === 0
+                    const isLast = i === byCategory.length - 1
                     return (
                       <div
                         key={d.category}
@@ -66,8 +68,9 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                           width: `${pct}%`,
                           backgroundColor: COLORS[i % COLORS.length],
                           filter: isHovered ? 'brightness(1.15)' : 'none',
+                          borderRadius: isFirst ? '16px 0 0 16px' : isLast ? '0 16px 16px 0' : '0',
                         }}
-                        onMouseEnter={() => setHoveredCategory(d.category)}
+                        onMouseEnter={() => { setHoveredCategory(d.category); console.log('hovered:', d.category) }}
                         onMouseLeave={() => setHoveredCategory(null)}
                       >
                         {isHovered && (
