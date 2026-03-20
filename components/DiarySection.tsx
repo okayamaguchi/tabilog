@@ -20,7 +20,7 @@ export default async function DiarySection() {
 
       <div className="flex gap-3" style={{ height: '600px' }}>
         {/* 左: Featured 大カード */}
-        <Link href={`/posts/${featured.id}`} className="block group w-1/2 flex-shrink-0 h-full">
+        <Link href={`/posts/${featured.id}`} className="block group w-1/2 flex-shrink-0 h-full shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 rounded-[32px]">
           <div className="relative rounded-[32px] overflow-hidden h-full">
             <Image
               src={featured.thumbnail}
@@ -55,7 +55,7 @@ export default async function DiarySection() {
         {/* 右: 小カード 2×2 */}
         <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 h-full">
           {small.map((post) => (
-            <Link key={post.id} href={`/posts/${post.id}`} className="block group h-full">
+            <Link key={post.id} href={`/posts/${post.id}`} className="block group h-full shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 rounded-[32px]">
               <div className="relative rounded-[32px] overflow-hidden h-full">
                 <Image
                   src={post.thumbnail}
