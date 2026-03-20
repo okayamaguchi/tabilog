@@ -54,7 +54,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             <div className="flex gap-8 items-stretch">
               {/* 左: カスタム分割バー */}
               <div className="w-1/2 flex flex-col justify-center">
-                <div className="flex h-8" onMouseLeave={() => setHoveredCategory(null)}>
+                <div className="flex h-12" onMouseLeave={() => setHoveredCategory(null)}>
                   {byCategory.map((d, i) => {
                     const pct = (d.total / total) * 100
                     const isHovered = hoveredCategory === d.category
