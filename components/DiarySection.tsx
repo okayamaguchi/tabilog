@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { posts } from '../lib/posts'
 
 export default function DiarySection() {
-  const [featured, ...rest] = posts
-  const small = rest.slice(0, 4)
+  const shuffled = [...posts].sort(() => Math.random() - 0.5)
+  const featured = shuffled[0]
+  const small = shuffled.slice(1, 5)
 
   if (!featured) return null
 
