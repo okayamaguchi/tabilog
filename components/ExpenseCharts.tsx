@@ -54,7 +54,19 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
 
   return (
     <div className={showPie && showBar ? 'grid grid-cols-1 md:grid-cols-2 gap-8 mt-4' : 'mt-4'}>
-      {showPie && (
+      {showPie && (() => {
+        const total = byCategory.reduce((s, d) => s + d.total, 0)
+        const CategoryTooltip = ({ active, payload }: { active?: boolean; payload?: { dataKey: string; value: number }[] }) => {
+          if (!active || !payload?.length) return null
+          const item = payload[0]
+          const pct = ((item.value / total) * 100).toFixed(1)
+          return (
+            <div className="hidden md:block bg-gray-800 text-white rounded-lg px-3 py-2 text-sm shadow-lg">
+              {item.dataKey}: ¥{item.value.toLocaleString()} ({pct}%)
+            </div>
+          )
+        }
+        return (
         <div>
           {/* 2カラム: 左=積み上げ横棒グラフ、右=カテゴリリスト */}
           <div className="flex gap-8 items-stretch">
@@ -70,6 +82,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                 >
                   <XAxis type="number" hide />
                   <YAxis type="category" hide width={0} />
+                  <Tooltip content={<CategoryTooltip />} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
                   {byCategory.map((d, i) => (
                     <Bar
                       key={d.category}
@@ -105,7 +118,8 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             </ul>
           </div>
         </div>
-      )}
+        )
+      })()}
 
       {showBar && (
         <div>
