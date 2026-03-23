@@ -18,7 +18,7 @@ export default function VisitMap({ visits }: { visits: Visit[] }) {
     <MapContainer
       center={[47, 10]}
       zoom={4}
-      className="h-[350px] md:h-[500px]"
+      className="h-[280px] md:h-[500px]"
       scrollWheelZoom={false}
     >
       <TileLayer
@@ -29,7 +29,13 @@ export default function VisitMap({ visits }: { visits: Visit[] }) {
         <Marker key={v.id} position={[v.lat, v.lng]} icon={markerIcon}>
           <Popup>
             <p style={{ fontWeight: 600, color: '#4a7c59', margin: '0 0 2px' }}>{v.city}</p>
-            <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0 }}>{v.date}</p>
+            <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: '0 0 4px' }}>{v.date}</p>
+            <a
+              href={`/gallery?city=${encodeURIComponent(v.city)}`}
+              style={{ fontSize: '0.75rem', color: '#4a7c59', textDecoration: 'none', fontWeight: 500 }}
+            >
+              📸 Photos
+            </a>
           </Popup>
         </Marker>
       ))}

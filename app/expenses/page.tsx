@@ -1,18 +1,17 @@
-import Link from 'next/link'
+import Header from '../../components/Header'
 import ExpensesPageContent from '../../components/ExpensesPageContent'
+import { getExpenses } from '../../lib/expenses'
 
-export default function ExpensesPage() {
+export default async function ExpensesPage() {
+  const expenses = await getExpenses()
+
   return (
-    <main className="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
-      <Link
-        href="/"
-        className="text-sm font-medium mb-6 inline-block"
-        style={{ color: '#4a7c59' }}
-      >
-        ← Back to Top
-      </Link>
+    <>
+      <Header />
+      <main className="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
       <h1 className="text-2xl font-bold text-gray-900 mb-8">Expense Details</h1>
-      <ExpensesPageContent />
+      <ExpensesPageContent expenses={expenses} />
     </main>
+    </>
   )
 }

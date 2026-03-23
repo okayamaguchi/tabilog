@@ -1,12 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import {
-  expenses as mockExpenses,
   getByDate,
   type Expense,
 } from '../lib/expenses'
-import { loadLocalExpenses } from '../lib/localExpenses'
 import ExpenseCharts from './ExpenseCharts'
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -27,18 +24,9 @@ const CATEGORY_EMOJI: Record<string, string> = {
   'Other':     '📦',
 }
 
-export default function ExpensesPageContent() {
-  const [allExpenses, setAllExpenses] = useState<Expense[]>(mockExpenses)
-
-  useEffect(() => {
-    const local = loadLocalExpenses()
-    if (local.length > 0) {
-      setAllExpenses([...mockExpenses, ...local])
-    }
-  }, [])
-
-  const byDate = getByDate(allExpenses)
-  const sorted = [...allExpenses].sort(
+export default function ExpensesPageContent({ expenses }: { expenses: Expense[] }) {
+  const byDate = getByDate(expenses)
+  const sorted = [...expenses].sort(
     (a, b) => b.date.localeCompare(a.date)
   )
 
