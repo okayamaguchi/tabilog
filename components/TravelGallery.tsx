@@ -77,15 +77,16 @@ export default function TravelGallery({ photos }: { photos: Photo[] }) {
           {doubled.map((photo, i) => (
             <div
               key={`${photo.id}-${i}`}
-              className="flex-shrink-0 w-[300px] h-[300px] md:w-[400px] md:h-[400px] cursor-pointer"
+              className="flex-shrink-0 w-[300px] h-[300px] md:w-[400px] md:h-[400px] cursor-pointer group/card"
               onClick={() => setSelected(photo)}
             >
-              <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-white">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg group-hover/card:shadow-2xl transition-shadow duration-300">
                 <img
                   src={photo.src}
                   alt={photo.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 hover:opacity-60"
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-white opacity-0 group-hover/card:opacity-40 transition-opacity duration-500 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent z-10 pointer-events-none">
                   <p className="text-white text-sm md:text-base font-medium">{photo.title}</p>
                   {photo.date && (
