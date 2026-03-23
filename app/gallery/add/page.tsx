@@ -4,7 +4,7 @@ import { type FormEvent, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../../components/Header'
-import heic2any from 'heic2any'
+// heic2any is imported dynamically to avoid SSR window error
 
 const CITIES = ['Rome', 'Florence', 'Venice', 'Panzano', 'Warsaw']
 
@@ -35,6 +35,7 @@ export default function AddPhotoPage() {
       setConverting(true)
       setPreview(null)
       try {
+        const heic2any = (await import('heic2any')).default
         const blob = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.85 }) as Blob
         const converted = new File([blob], f.name.replace(/\.heic$/i, '.jpg').replace(/\.heif$/i, '.jpg'), { type: 'image/jpeg' })
         setFile(converted)
