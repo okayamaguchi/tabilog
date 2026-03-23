@@ -35,10 +35,7 @@ const COLORS = [
   '#b8d4c4',
 ]
 
-const fmt = (v: number) =>
-  v >= 10000
-    ? `${(v / 10000).toFixed(v % 10000 === 0 ? 0 : 1)}万`
-    : `${v.toLocaleString()}`
+const fmt = (v: number) => `¥${v.toLocaleString()}`
 
 export default function ExpenseCharts({ byCategory, byDate }: Props) {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
@@ -70,7 +67,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
                           filter: isHovered ? 'brightness(1.15)' : 'none',
                           borderRadius: isFirst ? '16px 0 0 16px' : isLast ? '0 16px 16px 0' : '0',
                         }}
-                        onMouseEnter={() => { setHoveredCategory(d.category); console.log('hovered:', d.category) }}
+                        onMouseEnter={() => setHoveredCategory(d.category)}
                         onMouseLeave={() => setHoveredCategory(null)}
                       >
                         {isHovered && (
@@ -117,7 +114,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
             Daily Spending
           </h3>
           <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={byDate} margin={{ top: 4, right: 8, left: 0, bottom: 40 }}>
+            <BarChart data={byDate} margin={{ top: 4, right: 8, left: 16, bottom: 40 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis
                 dataKey="date"
@@ -129,7 +126,7 @@ export default function ExpenseCharts({ byCategory, byDate }: Props) {
               <YAxis
                 tick={{ fontSize: 10, fill: '#9ca3af' }}
                 tickFormatter={fmt}
-                width={40}
+                width={60}
               />
               <Tooltip
                 formatter={(value) => [`¥${Number(value).toLocaleString()}`, 'Amount']}

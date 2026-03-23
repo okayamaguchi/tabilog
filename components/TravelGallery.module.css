@@ -1,0 +1,45 @@
+/* Mobile: horizontal scroll */
+@media (max-width: 767px) {
+  .scrollContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .scrollTrack {
+    display: flex;
+    gap: 0.75rem;
+    width: max-content;
+    padding: 0.5rem 0;
+    animation: none;
+  }
+}
+
+/* Desktop: horizontal scroll animation */
+@media (min-width: 768px) {
+  .scrollContainer {
+    overflow-x: clip;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .scrollTrack {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    padding: 0.5rem 0;
+    animation: scroll 30s linear infinite;
+  }
+
+  .scrollTrack:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-272px * 6));
+    }
+  }
+}

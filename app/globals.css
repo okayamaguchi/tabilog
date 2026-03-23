@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: linear-gradient(to bottom, #FDFCF8, #f0f4f1);
+  background: #FAFAFA;
   min-height: 100vh;
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }

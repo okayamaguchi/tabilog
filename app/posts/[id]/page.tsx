@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Header from '../../../components/Header'
 import { getPostById } from '../../../lib/posts'
 
 type Props = {
@@ -16,14 +17,9 @@ export default async function PostPage({ params }: Props) {
   }
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10">
-      <Link
-        href="/"
-        className="text-sm font-medium mb-8 inline-block"
-        style={{ color: '#4a7c59' }}
-      >
-        ← 一覧へ
-      </Link>
+    <>
+      <Header />
+      <main className="max-w-2xl mx-auto px-4 py-10">
 
       <div className="relative h-[400px] rounded-xl overflow-hidden mt-4">
         <Image
@@ -52,6 +48,7 @@ export default async function PostPage({ params }: Props) {
           <p key={i}>{paragraph}</p>
         ))}
       </div>
-    </main>
+      </main>
+    </>
   )
 }
