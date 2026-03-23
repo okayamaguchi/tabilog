@@ -15,10 +15,11 @@ const markerIcon = L.divIcon({
 
 export default function VisitMap({ visits }: { visits: Visit[] }) {
   return (
+    <div className="relative z-0 h-full w-full">
     <MapContainer
       center={[47, 10]}
       zoom={4}
-      className="h-[280px] md:h-[500px]"
+      className="h-full w-full"
       scrollWheelZoom={false}
     >
       <TileLayer
@@ -40,5 +41,6 @@ export default function VisitMap({ visits }: { visits: Visit[] }) {
         </Marker>
       ))}
     </MapContainer>
+    </div>
   )
 }

@@ -11,3 +11,12 @@ body {
 .font-poppins {
   font-family: 'Poppins', sans-serif;
 }
+
+/* 横スクロールバー非表示 */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,39 +1,19 @@
 import Link from 'next/link'
 import Header from '../components/Header'
+import SectionScroll from '../components/SectionScroll'
+import SideNavigation from '../components/SideNavigation'
+import SocialIcons from '../components/SocialIcons'
 import ExpenseDashboard from '../components/ExpenseDashboard'
 import TravelGallery from '../components/TravelGallery'
 import VisitMapWrapper from '../components/VisitMapWrapper'
 import NewsSection from '../components/NewsSection'
-import SnsLinks from '../components/SnsLinks'
 import { getNotionPlaces } from '../lib/places'
 import { getPhotoGallery } from '../lib/photo'
 import { getNewsList } from '../lib/news'
 import { getExpenses } from '../lib/expenses'
 import { visits as mockVisits } from '../lib/visits'
 
-function BackgroundImage() {
-  const desktopBg = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_DESKTOP
-  const mobileBg = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_MOBILE
-  if (!desktopBg && !mobileBg) return null
-
-  return (
-    <div className="fixed inset-0 -z-10">
-      {desktopBg && (
-        <div
-          className="hidden md:block absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${desktopBg})` }}
-        />
-      )}
-      {mobileBg && (
-        <div
-          className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${mobileBg})` }}
-        />
-      )}
-      <div className="absolute inset-0 bg-black/20" />
-    </div>
-  )
-}
+const isEditMode = process.env.NEXT_PUBLIC_MODE !== 'true'
 
 export default async function Home() {
   const [notionPlaces, photos, news, expenses] = await Promise.all([
@@ -43,96 +23,131 @@ export default async function Home() {
     getExpenses(),
   ])
   const visits = notionPlaces.length > 0 ? notionPlaces : mockVisits
+  const desktopBg = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_DESKTOP
+  const mobileBg = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_MOBILE
 
   return (
-    <div className="min-h-screen relative">
-      <BackgroundImage />
+    <>
+      <Header />
+      <SideNavigation />
+      <SocialIcons />
 
-      <div className="relative z-10">
-        <Header showClock />
+      <SectionScroll>
+        <main>
+          {/* Section 1: おすすめ都市（背景画像あり） */}
+          <section className="h-screen relative flex items-center justify-center">
+            {desktopBg && (
+              <div
+                className="hidden md:block absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
+                style={{ backgroundImage: `url(${desktopBg})` }}
+              />
+            )}
+            {mobileBg && (
+              <div
+                className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat -z-10"
+                style={{ backgroundImage: `url(${mobileBg})` }}
+              />
+            )}
+            <div className="absolute inset-0 bg-black/20 -z-10" />
 
-        <main className="max-w-[1400px] mx-auto px-4 md:px-8 pt-24 md:pt-12 pb-10">
-
-          {/* 🌍 おすすめ都市 */}
-          <div className="flex justify-center mb-10">
-            <Link
-              href="/recommendations/form"
-              className="text-sm font-semibold px-6 py-3 min-h-[44px] flex items-center rounded-full text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-              style={{
-                background: 'linear-gradient(135deg, #4a7c59, #6ab87a)',
-                boxShadow: '0 2px 10px rgba(74, 124, 89, 0.3)',
-              }}
-            >
-              🌍 おすすめ都市を教えて！
-            </Link>
-          </div>
-
-          {/* 📢 お知らせ */}
-          <div id="news">
-            <NewsSection news={news} />
-          </div>
-
-          {/* 📸 記録 */}
-          <div id="photos" className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold" style={{ color: '#4a7c59' }}>
-              📸 記録
-            </h2>
-            <div className="flex items-center gap-2">
+            <div className="relative z-10 w-full max-w-2xl mx-auto px-4 text-center">
               <Link
-                href="/gallery"
-                className="text-sm font-semibold px-5 py-3 min-h-[44px] flex items-center rounded-full text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+                href="/recommendations/form"
+                className="inline-flex text-sm font-semibold px-8 py-3 items-center rounded-full text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                 style={{
-                  background: 'linear-gradient(135deg, #4a7c59, #6ab87a)',
-                  boxShadow: '0 2px 10px rgba(74, 124, 89, 0.3)',
+                  background: 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(255,255,255,0.3)',
                 }}
               >
-                もっと見る
+                おすすめ都市を教えて →
               </Link>
-              {process.env.NEXT_PUBLIC_MODE !== 'true' && (
+            </div>
+          </section>
+
+          {/* Section 2: お知らせ */}
+          <section id="news" className="h-screen flex flex-col items-center justify-center py-16 px-4 bg-[#FAFAFA]">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">お知らせ</h2>
+
+            <div className="w-full max-w-4xl flex-1 overflow-y-auto px-4">
+              <NewsSection news={news} />
+            </div>
+
+            {isEditMode && (
+              <div className="flex gap-4 mt-8">
+                <Link
+                  href="/news/add"
+                  className="px-8 py-3 bg-white border-2 border-[#4a7c59] text-[#4a7c59] rounded-full hover:bg-gray-50 transition flex items-center gap-2"
+                >
+                  ✏️ Add
+                </Link>
+              </div>
+            )}
+          </section>
+
+          {/* Section 3: 記録（写真） */}
+          <section id="photos" className="h-screen flex flex-col items-center justify-center py-8 md:py-16 bg-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 px-4">記録</h2>
+
+            <TravelGallery photos={photos} />
+
+            <div className="flex gap-4 mt-8">
+              <Link
+                href="/gallery"
+                className="px-8 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition flex items-center gap-2"
+              >
+                View More →
+              </Link>
+              {isEditMode && (
                 <Link
                   href="/gallery/add"
-                  className="text-sm font-semibold px-5 py-3 min-h-[44px] flex items-center rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-                  style={{
-                    background: '#FFFFFF',
-                    color: '#3a6348',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                  }}
+                  className="px-8 py-3 bg-white border-2 border-gray-800 text-gray-800 rounded-full hover:bg-gray-50 transition flex items-center gap-2"
                 >
                   ✏️ Add
                 </Link>
               )}
             </div>
-          </div>
-          <TravelGallery photos={photos} />
+          </section>
 
-          {/* 📍 旅路 */}
-          <section id="places" className="relative z-0 mt-12">
-            <h2 className="text-base font-semibold mb-4" style={{ color: '#4a7c59' }}>
-              📍 旅路
-            </h2>
-            <div
-              className="rounded-[20px] overflow-hidden"
-              style={{
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0,0,0,0.04)',
-              }}
-            >
+          {/* Section 4: 旅路（Places） */}
+          <section id="places" className="h-screen flex flex-col items-center justify-center py-8 md:py-16 px-4 bg-[#FAFAFA]">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">旅路</h2>
+
+            <div className="w-full max-w-[1400px] h-[60vh] md:flex-1 min-h-0 overflow-hidden rounded-2xl shadow-lg">
               <VisitMapWrapper visits={visits} />
             </div>
           </section>
 
-          {/* 💰 Budget */}
-          <div id="budget" className="mt-12">
-            <ExpenseDashboard expenses={expenses} />
-          </div>
+          {/* Section 5: 予算 */}
+          <section id="budget" className="h-screen flex flex-col items-center justify-center py-16 px-4 bg-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">予算</h2>
+
+            <div className="w-full max-w-4xl flex-1 overflow-y-auto px-4 flex items-center justify-center">
+              <div className="w-full">
+                <ExpenseDashboard expenses={expenses} />
+              </div>
+            </div>
+
+            {isEditMode && (
+              <div className="flex gap-4 mt-8">
+                <Link
+                  href="/expenses"
+                  className="px-8 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition flex items-center gap-2"
+                >
+                  View More →
+                </Link>
+                <Link
+                  href="/expenses/add"
+                  className="px-8 py-3 bg-white border-2 border-gray-800 text-gray-800 rounded-full hover:bg-gray-50 transition flex items-center gap-2"
+                >
+                  ✏️ Add
+                </Link>
+              </div>
+            )}
+          </section>
 
         </main>
-
-        {/* SNS Footer */}
-        <footer className="py-8 flex flex-col items-center gap-3">
-          <SnsLinks />
-          <p className="text-xs text-gray-400">Kanna in Europe</p>
-        </footer>
-      </div>
-    </div>
+      </SectionScroll>
+    </>
   )
 }

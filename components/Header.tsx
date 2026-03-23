@@ -13,14 +13,13 @@ function getDayNumber() {
 }
 
 const MENU_ITEMS = [
-  { label: '📢 お知らせ', id: 'news' },
-  { label: '📸 記録', id: 'photos' },
-  { label: '📍 旅路', id: 'places' },
-  { label: '💰 予算', id: 'budget' },
+  { label: 'お知らせ', index: 1 },
+  { label: '記録', index: 2 },
+  { label: '旅路', index: 3 },
+  { label: '予算', index: 4 },
 ]
 
-
-export default function Header({ showClock = false }: { showClock?: boolean }) {
+export default function Header() {
   const day = getDayNumber()
   const [menuOpen, setMenuOpen] = useState(false)
   const [menuClosing, setMenuClosing] = useState(false)
@@ -33,22 +32,26 @@ export default function Header({ showClock = false }: { showClock?: boolean }) {
     }, 200)
   }
 
-  const handleMenuClick = (id: string) => {
+  const scrollToSection = (sectionIndex: number) => {
     closeMenu()
     setTimeout(() => {
-      const el = document.getElementById(id)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      const container = document.querySelector('.h-screen.overflow-hidden')
+      const sections = container?.querySelectorAll(':scope > main > section')
+      if (sections?.[sectionIndex]) {
+        const target = sections[sectionIndex] as HTMLElement
+        container?.scrollTo({ top: target.offsetTop, behavior: 'smooth' })
+      }
     }, 220)
   }
 
   return (
     <>
-      {/* tabilog card - always on top */}
+      {/* tabilog card - fixed top left */}
       <Link
         href="/"
-        className="fixed top-4 left-4 md:left-8 z-[300] rounded-2xl px-5 py-4 flex flex-col items-start hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+        className="fixed top-4 left-4 md:left-8 z-[300] rounded-2xl px-5 py-4 flex flex-col items-start hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 backdrop-blur-sm"
         style={{
-          background: 'rgba(255, 255, 255, 0.7)',
+          background: 'rgba(255, 255, 255, 0.85)',
           boxShadow: '0 4px 16px rgba(74, 124, 89, 0.15)',
         }}
       >
@@ -58,29 +61,20 @@ export default function Header({ showClock = false }: { showClock?: boolean }) {
         </span>
       </Link>
 
-      <div className="sticky top-0 z-50 w-full px-4 md:px-8 pt-4 pb-2 h-[80px] md:h-[88px]">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between h-full">
-          {/* Spacer for tabilog card */}
-          <div className="w-[120px] md:w-[140px]" />
-
-          {/* Desktop: clock */}
-          {showClock && (
-            <div className="hidden md:block">
-              <DualClock />
-            </div>
-          )}
-
-          {/* Mobile: hamburger */}
-          <button
-            className="md:hidden flex flex-col justify-center items-center gap-[6px] p-2"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Menu"
-          >
-            <span className="block w-6 h-[3px] rounded-full" style={{ background: '#4a7c59' }} />
-            <span className="block w-6 h-[3px] rounded-full" style={{ background: '#4a7c59' }} />
-          </button>
-        </div>
+      {/* Desktop: clock - fixed top right */}
+      <div className="hidden md:block fixed top-4 right-8 z-[300]">
+        <DualClock />
       </div>
+
+      {/* Mobile: hamburger - fixed top right */}
+      <button
+        className="md:hidden fixed top-6 right-4 z-[300] flex flex-col justify-center items-center gap-[6px] p-2"
+        onClick={() => setMenuOpen(true)}
+        aria-label="Menu"
+      >
+        <span className="block w-6 h-[3px] rounded-full bg-[#4a7c59]" />
+        <span className="block w-6 h-[3px] rounded-full bg-[#4a7c59]" />
+      </button>
 
       {/* Mobile fullscreen menu */}
       {menuOpen && (
@@ -88,7 +82,6 @@ export default function Header({ showClock = false }: { showClock?: boolean }) {
           className="fixed inset-0 z-[200] bg-white flex flex-col"
           style={{ animation: `${menuClosing ? 'fadeOut' : 'fadeIn'} 0.2s ease-out forwards` }}
         >
-          {/* Close button */}
           <div className="flex justify-end p-5">
             <button
               onClick={closeMenu}
@@ -101,13 +94,12 @@ export default function Header({ showClock = false }: { showClock?: boolean }) {
             </button>
           </div>
 
-          {/* Menu items */}
           <nav className="flex-1 px-8 pt-8">
             <ul className="flex flex-col gap-6">
-              {MENU_ITEMS.map(({ label, id }) => (
-                <li key={id}>
+              {MENU_ITEMS.map(({ label, index }) => (
+                <li key={label}>
                   <button
-                    onClick={() => handleMenuClick(id)}
+                    onClick={() => scrollToSection(index)}
                     className="text-left text-xl font-semibold transition-opacity hover:opacity-70"
                     style={{ color: '#4a7c59' }}
                   >
@@ -116,10 +108,8 @@ export default function Header({ showClock = false }: { showClock?: boolean }) {
                 </li>
               ))}
             </ul>
-
           </nav>
 
-          {/* SNS icons at bottom center */}
           <div className="flex justify-center pb-10">
             <SnsLinks />
           </div>

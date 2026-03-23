@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import styles from './TravelGallery.module.css'
 
 type Photo = {
   id: string
@@ -12,40 +11,88 @@ type Photo = {
   note?: string
 }
 
-const fallbackPhotos: Photo[] = [
-  { id: '1', title: 'Eiffel Tower', src: 'https://picsum.photos/seed/eiffel/512/512' },
-  { id: '2', title: 'Colosseum', src: 'https://picsum.photos/seed/colosseum/512/512' },
-  { id: '3', title: 'Sagrada Familia', src: 'https://picsum.photos/seed/sagrada/512/512' },
-  { id: '4', title: 'Santorini', src: 'https://picsum.photos/seed/santorini/512/512' },
-  { id: '5', title: 'Swiss Alps', src: 'https://picsum.photos/seed/alps/512/512' },
-  { id: '6', title: 'Amsterdam Canal', src: 'https://picsum.photos/seed/amsterdam/512/512' },
-]
-
 export default function TravelGallery({ photos }: { photos: Photo[] }) {
   const [selected, setSelected] = useState<Photo | null>(null)
-  const displayPhotos = photos.length > 0 ? photos : fallbackPhotos
-  const doubled = [...displayPhotos, ...displayPhotos]
+  const trackRef = useRef<HTMLDivElement>(null)
+  const offsetRef = useRef(0)
+  const animRef = useRef<number>(0)
+  const pausedRef = useRef(false)
+
+  // duplicate photos for seamless loop
+  const doubled = [...photos, ...photos]
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track || photos.length === 0) return
+
+    const speed = 0.8
+
+    const tick = () => {
+      if (!pausedRef.current) {
+        offsetRef.current -= speed
+        // reset when first set has fully scrolled out
+        const halfWidth = track.scrollWidth / 2
+        if (Math.abs(offsetRef.current) >= halfWidth) {
+          offsetRef.current = 0
+        }
+        track.style.transform = `translateX(${offsetRef.current}px)`
+      }
+      animRef.current = requestAnimationFrame(tick)
+    }
+
+    animRef.current = requestAnimationFrame(tick)
+
+    const pause = () => { pausedRef.current = true }
+    const resume = () => { pausedRef.current = false }
+
+    track.addEventListener('mouseenter', pause)
+    track.addEventListener('mouseleave', resume)
+    track.addEventListener('touchstart', pause)
+    track.addEventListener('touchend', resume)
+
+    return () => {
+      cancelAnimationFrame(animRef.current)
+      track.removeEventListener('mouseenter', pause)
+      track.removeEventListener('mouseleave', resume)
+      track.removeEventListener('touchstart', pause)
+      track.removeEventListener('touchend', resume)
+    }
+  }, [photos.length])
+
+  if (photos.length === 0) return null
+
+  const formatDate = (d?: string) => {
+    if (!d) return ''
+    const dt = new Date(d + 'T00:00:00')
+    return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`
+  }
 
   return (
-    <section className="mb-12">
-      <div className={styles.scrollContainer}>
-        <div className={styles.scrollTrack}>
+    <>
+      <div className="w-full flex-1 overflow-hidden relative">
+        <div
+          ref={trackRef}
+          className="flex gap-4 md:gap-6 px-4 md:px-8 h-full items-center will-change-transform"
+        >
           {doubled.map((photo, i) => (
             <div
               key={`${photo.id}-${i}`}
-              className="flex-shrink-0 hover:-translate-y-1 transition-all duration-200 rounded-[20px] overflow-hidden cursor-pointer"
-              style={{
-                background: '#FFFFFF',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0,0,0,0.04)',
-              }}
+              className="flex-shrink-0 w-[300px] h-[300px] md:w-[400px] md:h-[400px] cursor-pointer"
               onClick={() => setSelected(photo)}
             >
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="w-40 h-40 md:w-64 md:h-64 object-cover"
-              />
-              <p className="text-sm text-gray-700 text-center py-2 bg-white">{photo.title}</p>
+              <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-white">
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 hover:opacity-60"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent z-10 pointer-events-none">
+                  <p className="text-white text-sm md:text-base font-medium">{photo.title}</p>
+                  {photo.date && (
+                    <p className="text-white/80 text-xs md:text-sm mt-1">{formatDate(photo.date)}</p>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -53,15 +100,12 @@ export default function TravelGallery({ photos }: { photos: Photo[] }) {
 
       {selected && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80"
+          className="fixed inset-0 z-[400] flex items-center justify-center bg-black/80"
           onClick={() => setSelected(null)}
         >
           <div
-            className="relative rounded-[20px] overflow-hidden max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto"
-            style={{
-              background: '#FFFFFF',
-              boxShadow: '0 8px 40px rgba(0,0,0,0.2)',
-            }}
+            className="relative rounded-2xl overflow-hidden max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto bg-white"
+            style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.2)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -81,7 +125,7 @@ export default function TravelGallery({ photos }: { photos: Photo[] }) {
                 <h3 className="text-xl font-semibold">{selected.title}</h3>
               )}
               {selected.date && (
-                <p className="text-sm text-gray-500 mt-1">{selected.date}</p>
+                <p className="text-sm text-gray-500 mt-1">{formatDate(selected.date)}</p>
               )}
               {selected.note && (
                 <p className="text-gray-700 mt-2">{selected.note}</p>
@@ -91,6 +135,6 @@ export default function TravelGallery({ photos }: { photos: Photo[] }) {
         </div>,
         document.body
       )}
-    </section>
+    </>
   )
 }
