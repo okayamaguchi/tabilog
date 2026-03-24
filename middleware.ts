@@ -2,13 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const isPublic = process.env.NEXT_PUBLIC_MODE === 'true'
+  console.log('[middleware] NEXT_PUBLIC_MODE:', process.env.NEXT_PUBLIC_MODE, 'isPublic:', isPublic)
   if (isPublic) return NextResponse.next()
 
   const expectedUser = process.env.BASIC_AUTH_USERNAME
   const expectedPass = process.env.BASIC_AUTH_PASSWORD
+  console.log('[middleware] expectedUser:', expectedUser ? 'SET' : 'NOT SET', 'expectedPass:', expectedPass ? 'SET' : 'NOT SET')
   if (!expectedUser || !expectedPass) return NextResponse.next()
 
   const auth = request.headers.get('authorization')
+  console.log('[middleware] auth header:', auth ? 'present' : 'missing')
   if (auth) {
     const [scheme, encoded] = auth.split(' ')
     if (scheme === 'Basic' && encoded) {
