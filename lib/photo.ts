@@ -9,13 +9,13 @@ export type PhotoItem = {
 }
 
 export async function getPhotoGallery(): Promise<PhotoItem[]> {
-  const dsId = process.env.NOTION_PHOTO_DB_ID
-  if (!dsId) return []
+  const dbId = process.env.NOTION_PHOTO_DB_ID
+  if (!dbId) return []
 
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = await (notion.dataSources as any).query({
-      data_source_id: dsId,
+      data_source_id: dbId,
       sorts: [{ property: 'Date', direction: 'descending' }],
     })
 
@@ -34,7 +34,8 @@ export async function getPhotoGallery(): Promise<PhotoItem[]> {
         note: props['Note']?.rich_text?.[0]?.plain_text ?? undefined,
       }]
     })
-  } catch {
+  } catch (err) {
+    console.error('Failed to fetch photo gallery:', err)
     return []
   }
 }

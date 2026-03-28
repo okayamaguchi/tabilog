@@ -40,11 +40,13 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
               className="rounded-[16px] md:rounded-[32px] overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition cursor-pointer"
               onClick={() => setSelected(photo)}
             >
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="w-full aspect-square md:w-64 md:h-64 object-cover"
-              />
+              <div className="w-full aspect-square md:w-64 md:h-64 overflow-hidden">
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <p className="text-xs md:text-sm text-gray-700 text-center py-1.5 md:py-2 bg-white truncate px-2">{photo.title}</p>
             </div>
           ))}
