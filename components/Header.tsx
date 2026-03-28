@@ -51,7 +51,7 @@ export default function Header() {
         href="/"
         className="fixed top-4 left-4 md:left-8 z-[300] hover:opacity-90 transition-all duration-200 hover:-translate-y-0.5"
       >
-        <div className="relative w-32 h-24 md:w-40 md:h-28">
+        <div className="relative w-24 h-28 md:w-32 md:h-36">
           <img src="/okayama.svg" alt="okayama" className="w-full h-full drop-shadow-lg" />
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-lg md:text-xl font-bold leading-tight text-white drop-shadow-md">tabilog</span>
