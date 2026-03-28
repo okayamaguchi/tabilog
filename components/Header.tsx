@@ -54,8 +54,8 @@ export default function Header() {
         <div className="relative w-44 h-40">
           <img src="/okayama.svg" alt="okayama" className="w-full h-full drop-shadow-lg" />
           <div className="absolute top-[42%] left-[43%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-            <span className="text-2xl font-bold leading-tight text-white drop-shadow-lg tracking-wide">tabilog</span>
-            <span className="text-sm font-bold mt-1 text-white/95 drop-shadow-md">Day {day}</span>
+            <span className="text-xl font-bold leading-tight text-white drop-shadow-lg tracking-wide">tabilog</span>
+            <span className="text-xs font-bold mt-0.5 text-white/95 drop-shadow-md">Day {day}</span>
           </div>
         </div>
       </Link>
