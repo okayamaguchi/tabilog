@@ -51,11 +51,11 @@ export default function Header() {
         href="/"
         className="fixed top-4 left-4 md:left-8 z-[300] hover:opacity-90 transition-all duration-200 hover:-translate-y-0.5"
       >
-        <div className="relative w-40 h-36">
+        <div className="relative w-44 h-40">
           <img src="/okayama.svg" alt="okayama" className="w-full h-full drop-shadow-lg" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
-            <span className="text-2xl font-bold leading-tight text-white drop-shadow-lg">tabilog</span>
-            <span className="text-sm font-bold mt-1 text-white/95 drop-shadow-md">Day {day}</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center -mt-2">
+            <span className="text-2xl font-bold leading-tight text-white drop-shadow-lg tracking-wide">tabilog</span>
+            <span className="text-sm font-bold mt-1.5 text-white/95 drop-shadow-md">Day {day}</span>
           </div>
         </div>
       </Link>
