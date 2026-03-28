@@ -49,16 +49,17 @@ export default function Header() {
       {/* tabilog card - fixed top left */}
       <Link
         href="/"
-        className="fixed top-4 left-4 md:left-8 z-[300] rounded-2xl px-5 py-4 flex flex-col items-start hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 backdrop-blur-sm"
-        style={{
-          background: 'rgba(255, 255, 255, 0.85)',
-          boxShadow: '0 4px 16px rgba(74, 124, 89, 0.15)',
-        }}
+        className="fixed top-4 left-4 md:left-8 z-[300] hover:opacity-90 transition-all duration-200 hover:-translate-y-0.5"
       >
-        <span className="text-xl md:text-2xl font-bold leading-tight" style={{ color: '#4a7c59' }}>tabilog</span>
-        <span className="text-xs md:text-sm font-bold mt-0.5" style={{ color: 'rgba(74, 124, 89, 0.5)' }}>
-          Day {day}
-        </span>
+        <div className="relative w-32 h-24 md:w-40 md:h-28">
+          <img src="/okayama.svg" alt="okayama" className="w-full h-full drop-shadow-lg" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span className="text-lg md:text-xl font-bold leading-tight text-white drop-shadow-md">tabilog</span>
+            <span className="text-[10px] md:text-xs font-bold mt-0.5 text-white/80 drop-shadow-sm">
+              Day {day}
+            </span>
+          </div>
+        </div>
       </Link>
 
       {/* Desktop: clock - fixed top right */}

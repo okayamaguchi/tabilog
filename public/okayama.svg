@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none">
+  <!-- Okayama prefecture silhouette (simplified) -->
+  <!-- Main body: roughly rectangular, wider in west, eastern part narrower -->
+  <!-- Kibiji plateau in center-west, Tsuyama basin in north-east -->
+  <!-- Kojima peninsula juts down in south-center -->
+  <path
+    d="
+      M 10,30
+      L 18,20
+      L 30,18
+      L 45,22
+      L 55,15
+      L 68,12
+      L 78,18
+      L 90,14
+      L 100,18
+      L 112,12
+      L 125,16
+      L 138,14
+      L 148,20
+      L 158,18
+      L 168,24
+      L 178,22
+      L 188,30
+      L 185,40
+      L 190,50
+      L 182,58
+      L 175,55
+      L 168,62
+      L 162,58
+      L 155,65
+      L 148,62
+      L 140,68
+      L 132,65
+      L 125,70
+      L 130,78
+      L 128,85
+      L 122,90
+      L 116,88
+      L 118,96
+      L 112,102
+      L 106,100
+      L 100,106
+      L 94,103
+      L 88,108
+      L 82,105
+      L 78,112
+      L 72,110
+      L 68,116
+      L 62,114
+      L 58,120
+      L 52,118
+      L 48,112
+      L 42,115
+      L 38,110
+      L 40,102
+      L 35,98
+      L 30,100
+      L 24,95
+      L 22,88
+      L 28,82
+      L 22,75
+      L 18,68
+      L 14,62
+      L 8,58
+      L 6,48
+      L 10,40
+      Z
+    "
+    fill="#4a7c59"
+  />
+</svg>
