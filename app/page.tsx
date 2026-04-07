@@ -13,6 +13,8 @@ import { getPhotoGallery } from '../lib/photo'
 import { getNewsList } from '../lib/news'
 import { getExpenses } from '../lib/expenses'
 import { getRecommendations } from '../lib/recommendations'
+
+export const dynamic = 'force-dynamic'
 import { visits as mockVisits } from '../lib/visits'
 
 const isEditMode = process.env.NEXT_PUBLIC_MODE !== 'true'

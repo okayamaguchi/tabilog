@@ -2,6 +2,8 @@ import Header from '../../components/Header'
 import ExpensesPageContent from '../../components/ExpensesPageContent'
 import { getExpenses } from '../../lib/expenses'
 
+export const dynamic = 'force-dynamic'
+
 export default async function ExpensesPage() {
   const expenses = await getExpenses()
 
