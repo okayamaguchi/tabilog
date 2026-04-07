@@ -7,20 +7,23 @@ import ExpenseDashboard from '../components/ExpenseDashboard'
 import TravelGallery from '../components/TravelGallery'
 import VisitMapWrapper from '../components/VisitMapWrapper'
 import NewsSection from '../components/NewsSection'
+import RecommendationBubbles from '../components/RecommendationBubbles'
 import { getNotionPlaces } from '../lib/places'
 import { getPhotoGallery } from '../lib/photo'
 import { getNewsList } from '../lib/news'
 import { getExpenses } from '../lib/expenses'
+import { getRecommendations } from '../lib/recommendations'
 import { visits as mockVisits } from '../lib/visits'
 
 const isEditMode = process.env.NEXT_PUBLIC_MODE !== 'true'
 
 export default async function Home() {
-  const [notionPlaces, photos, news, expenses] = await Promise.all([
+  const [notionPlaces, photos, news, expenses, recommendations] = await Promise.all([
     getNotionPlaces(),
     getPhotoGallery(),
     getNewsList(),
     getExpenses(),
+    getRecommendations(),
   ])
   const visits = notionPlaces.length > 0 ? notionPlaces : mockVisits
   const desktopBg = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_DESKTOP
@@ -50,7 +53,12 @@ export default async function Home() {
             )}
             <div className="absolute inset-0 bg-black/20 -z-10" />
 
-            <div className="relative z-10 w-full max-w-2xl mx-auto px-4 text-center">
+            <div className="relative z-10 w-full max-w-2xl mx-auto px-4 flex flex-col items-center gap-6">
+              {recommendations.length > 0 && (
+                <div className="w-full max-h-[60vh] overflow-y-auto py-2">
+                  <RecommendationBubbles recommendations={recommendations} />
+                </div>
+              )}
               <Link
                 href="/recommendations/form"
                 className="inline-flex text-sm font-semibold px-8 py-3 items-center rounded-full text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
