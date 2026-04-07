@@ -23,7 +23,7 @@ export type Expense = {
 export const BUDGET = 2_000_000
 
 export async function getExpenses(): Promise<Expense[]> {
-  const dsId = process.env.NOTION_EXPENSES_DB_ID
+  const dsId = process.env.NOTION_EXPENSES_DB_ID?.trim()
   if (!dsId) return []
 
   try {
@@ -51,7 +51,7 @@ export async function getExpenses(): Promise<Expense[]> {
 }
 
 export async function addExpense(date: string, category: string, amount: number, memo: string) {
-  const dsId = process.env.NOTION_EXPENSES_DB_ID
+  const dsId = process.env.NOTION_EXPENSES_DB_ID?.trim()
   if (!dsId) throw new Error('NOTION_EXPENSES_DB_ID is not set')
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

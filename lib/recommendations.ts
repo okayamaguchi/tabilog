@@ -28,7 +28,7 @@ async function resolveDataSourceId(idFromEnv: string): Promise<string> {
 }
 
 export async function getRecommendations(): Promise<Recommendation[]> {
-  const dbId = process.env.NOTION_RECOMMENDATIONS_DB_ID
+  const dbId = process.env.NOTION_RECOMMENDATIONS_DB_ID?.trim()
   if (!dbId) {
     console.error('NOTION_RECOMMENDATIONS_DB_ID is not set')
     return []
@@ -62,7 +62,7 @@ export async function getRecommendations(): Promise<Recommendation[]> {
 }
 
 export async function addRecommendation(city: string, country: string, reason: string, name: string) {
-  const dbId = process.env.NOTION_RECOMMENDATIONS_DB_ID
+  const dbId = process.env.NOTION_RECOMMENDATIONS_DB_ID?.trim()
   if (!dbId) throw new Error('NOTION_RECOMMENDATIONS_DB_ID is not set')
 
   const today = new Date().toISOString().split('T')[0]
