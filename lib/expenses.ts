@@ -56,7 +56,7 @@ export async function addExpense(date: string, category: string, amount: number,
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   await (notion as any).pages.create({
-    parent: { database_id: dsId },
+    parent: { type: 'data_source_id', data_source_id: dsId },
     properties: {
       Memo: { title: [{ text: { content: memo || 'Untitled' } }] },
       Date: { date: { start: date } },
